@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+	header#site-header
+		div.container
+	div(class="container", data-ng-controller="AccountController")
+		div.login-container
+			h2 Sign in to Teech.io
+			div.github-login
+				a(href="/auth/github", class="btn btn-default github-btn") <i class="fa fa-github space-right"></i> login with GitHub
+				span.hr or
+			form(data-ng-submit="auth()")
+				div.notification
+				div.form-group
+					input(type="email", class="form-control", placeholder="email", data-ng-model="account.email", required="required")
+				div.form-group
+					input(type="password", class="form-control", placeholder="password", data-ng-model="account.password", required="required")
+					a(href="#password-recovery", class="forgot-link", data-toggle="modal") Forgot password?
+				div.form-action
+					button(type="submit", class="btn btn-primary uppercase") sign in
+			div.signup-link
+				p Don't have an account? <a href="/signup">Sign up here</a> 
+		//p.support-link Need help? Drop us a line at <a href="mailto:support@teech.io">support@teech.io</a>
+		div(id="password-recovery", class="modal fade")
+			div.modal-dialog
+				div.modal-content
+					div.modal-header
+						h3 Password Reset
+						p Enter the email address you used to sign up, and we will send you a link to reset the password on your account. 
+					div.modal-body
+						div.notification
+						input(type="email", class="form-control", placeholder="your email address", data-ng-model="_forgot.email")
+					div.modal-footer
+						button(type="button", class="btn btn-default uppercase", data-dismiss="modal") cancel
+						button(type="button", class="btn btn-primary uppercase", data-ng-click="sendReset()") send email

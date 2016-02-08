@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+	header#site-header
+		div.container
+	div(class="container", data-ng-controller="AccountController")
+		div.resetpwd-container
+			h2 Reset password
+			div.notification
+			form(data-ng-submit="doReset()")
+				div.form-group
+					input(type="password", class="form-control", placeholder="new password", data-ng-model="_forgot.password", required="required")
+				div.form-group
+					input(type="password", class="form-control", placeholder="confirm password", data-ng-model="_forgot.password_check", required="required")
+				div.form-action
+					button(type="submit", class="btn btn-primary uppercase") reset
+		p.support-link Need help? Drop us a line at <a href="mailto:support@teech.io">support@teech.io</a>

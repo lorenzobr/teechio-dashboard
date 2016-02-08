@@ -1,0 +1,100 @@
+div(id="walkthrough", class="steps-list", data-walkthrough="")
+	div(class="walkthrough-index")
+		div.grid-container.index-container
+			i#step-1.fa.fa-dot-circle-o.active
+			i#step-2.fa.fa-dot-circle-o
+			i#step-3.fa.fa-dot-circle-o
+			i#step-4.fa.fa-dot-circle-o
+			i#step-5.fa.fa-dot-circle-o
+			i#step-6.fa.fa-dot-circle-o
+			i#step-7.fa.fa-dot-circle-o
+			i#step-8.fa.fa-dot-circle-o
+	div#step-1.step.grid-container
+		div.grid-50
+			h2 Applications
+			p In order to start using the Teech.io backend, the first thing you need to do is wiring up your application to your Teech.io backend. It's very simple, just add the application from your Teech.io dashboard. Each application has an ID that you need to use together with your API key in order to authenticate your application when requesting data from the backend.
+			a(class="next-step-btn btn btn-primary btn-lg", data-href="#step-2") next <i class="fa fa-chevron-circle-right"></i>
+		div.grid-50.walkthrough-example-image.walkthrough-1-step-image
+	div#step-2.step.grid-container.set-hidden
+		div.grid-50
+			h2 API console
+			p Through the API console you can manage all your collections and data: you can add, update, delete items within your collection and even query the collections.
+			a(class="next-step-btn btn btn-primary btn-lg", data-href="#step-3") next <i class="fa fa-chevron-circle-right"></i>
+		div.grid-50.walkthrough-example-image.walkthrough-2-step-image
+	div#step-3.step.grid-container.set-hidden
+		div.grid-50
+			h2 Files browser
+			p The files browser let you upload and manage the files that you need for your applications.
+			a(class="next-step-btn btn btn-primary btn-lg", data-href="#step-4") next <i class="fa fa-chevron-circle-right"></i>
+		div.grid-50.walkthrough-example-image.walkthrough-3-step-image
+	div#step-4.step.grid-container.set-hidden
+		div.grid-50
+			h2 API
+			p The REST API allows an app to interact with its backend on Teech.io programmatically via simple HTTP requests. The API is accessed via the http://api.teech.io domain.
+			p JSON will be returned in all responses, including errors. The HTTP response codes are used to indicate the status of each request. 
+			h4 Authentication
+			p All requests to teech.io REST API require you to authenticate via HTTP headers. The <code>Teech-Application-Id</code> identifies the application you’re accessing and the <code>Teech-REST-API-key</code> authenticates your request.
+			a(class="next-step-btn btn btn-primary btn-lg", data-href="#step-5") next <i class="fa fa-chevron-circle-right"></i>
+		div.grid-50.walkthrough-example-image.walkthrough-4-step-image
+	div#step-5.step.grid-container.set-hidden
+		div.grid-50
+			h2 Collections
+			p Collections are grouping the objects within Teech.io backend. Collections are like tables in relational databases.
+			p Next steps will give you an overview of how collections work and of the main collection types that you can use.
+			a(class="next-step-btn btn btn-primary btn-lg", data-href="#step-6") next <i class="fa fa-chevron-circle-right"></i>
+		div.grid-50.walkthrough-example-image.walkthrough-5-step-image
+	div#step-6.step.grid-container.set-hidden
+		div.grid-50
+			h2 Key/Value
+			p Key/Values pairs are the way you can define properties for each object stored in a collection.
+			div.code-sample
+				ul.nav.nav-tabs
+					li.active: a(data-target="#http-get-sample", data-toggle="tab") GET
+					li: a(data-target="#http-post-sample", data-toggle="tab") POST
+					li: a(data-target="#http-put-sample", data-toggle="tab") PUT
+					li: a(data-target="#http-delete-sample", data-toggle="tab") DELETE
+				div.tab-content
+					div#http-get-sample.tab-pane.active
+						pre: code 
+							| curl http://api.teech.io/users \
+							|  -X GET
+					div#http-post-sample.tab-pane
+						pre: code 
+							| curl http://api.teech.io/users \
+							|  -X POST \
+							|  -H 'Content-Type: application/json' \
+							|  -d '{"username":"tim", "password":"Kld98Sld9", "name":"Tim Red"}'
+					div#http-put-sample.tab-pane 
+						pre: code 
+							| curl http://api.teech.io/users \
+							|  -X PUT \
+							|  -H 'Content-Type: application/json' \
+							|  -d '{"fullname":"Tim Roth"}'
+					div#http-delete-sample.tab-pane
+						pre: code 
+							| curl http://api.teech.io/users/8d93iI093jm \
+							|  -X DELETE
+			a(class="next-step-btn btn btn-primary btn-lg", data-href="#step-7") next <i class="fa fa-chevron-circle-right"></i>
+		div.grid-50.walkthrough-example-image.walkthrough-6-step-image
+	div#step-7.step.grid-container.set-hidden
+		div.grid-50
+			h2 Queries
+			p Queries let you search through a collection and limit and/or skip the results.
+			div.code-sample
+				ul.nav.nav-tabs
+					li.active: a(data-target="#http-get-sample", data-toggle="tab") GET
+				div.tab-content
+					div#http-get-sample.tab-pane.active
+						pre: code 
+							| curl http://api.teech.io/users?query={"username":"tim"} \
+							|  -X GET
+			a(class="next-step-btn btn btn-primary btn-lg", data-href="#step-8") next <i class="fa fa-chevron-circle-right"></i>
+		div.grid-50.walkthrough-example-image.walkthrough-7-step-image
+	div#step-8.step.grid-container.set-hidden
+		div.grid-50
+			h2 Now start building!
+			p Awesome, you’re well on your way to building your first application using Teech.io.<br/>Learn more about our platform by heading to our documentation.
+			a(href="//teech.io/documentation", class="learn-more-btn btn") <i class="fa fa-list-alt space-right"></i> read the docs
+			p Or jump back to the Dashboard to create applications, collections and more.
+			a(href="/", class="skip-dashboard btn") <i class="fa fa-home space-right"></i> go to the dashboard
+		div.grid-50

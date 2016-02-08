@@ -1,0 +1,50 @@
+doctype
+html(lang="en")
+	head
+		title 
+
+		//link(href='//fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
+		link(href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600", rel="stylesheet", type="text/css")
+		link(rel="stylesheet", href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/smoothness/jquery-ui.css")
+		link(rel="stylesheet", href="/public/css/utils/unsemantic.css")
+		link(rel="stylesheet", href="/public/css/style.css")
+			
+	body(id=bodyId, class=['page', 'fluid'], data-ng-app="teechioDashboard", data-n-progress="", data-fade-n-remove="", data-clear-form="", data-slide-toggle="", data-notification-pop="")
+		div#wrap
+			- if(flash && flash.message) {
+			div(class="session-message #{flash.clazz}") #{flash.message}
+				- delete flash.message
+			- }
+			header#site-header
+				nav(class="navbar")
+					div.container
+						div(class="navbar-header logo")
+							a(href="/", class="logo")
+						ul(class="navbar navbar-nav navbar-right")
+							li(class="open-walkthrough help-nav"): a(href="/walkthrough", class="open-walkthrough help-nav") walkthrough
+							li(class="help-nav"): a(href="http://developer.teech.io", class="help-nav", target="_blank") documentation
+							li(id="account-dropdown", class="dropdown")
+								a(class="dropdown-toggle", data-toggle="dropdown") <img src="//gravatar.com/avatar/#{session.user.ehash}?s=30&amp;d=retro" class="gravatar"> <span>Account <i class="fa fa-caret-down space-left"></i></span>
+								ul(class="dropdown-menu")
+									li: a(href="/settings") <i class="fa fa-cog space-right"></i>Settings
+									li: a(href="/logout", target="_self") <i class="fa fa-unlock space-right"></i> Logout
+			div#content
+				div(data-ng-view="", data-body-id="")
+		//
+			footer#site-footer
+				div.grid-container
+					p.support-link Need help? Drop us a line at <a href="mailto:support@teech.io">support@teech.io</a>
+				
+
+		script(src="//code.jquery.com/jquery-2.1.0.min.js")
+		script(src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js")
+		script(src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
+		script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js")
+		script(src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js")
+		script(src="https://s3-eu-west-1.amazonaws.com/a1.teech.io/assets/plupload/plupload.full.min.js")
+		script(src="//js.stripe.com/v2/")
+
+		script(src="/public/js/libs.js")
+		script(src="/public/js/main.js")
+
+		block scripts

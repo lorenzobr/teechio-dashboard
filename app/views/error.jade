@@ -1,0 +1,13 @@
+doctype
+html(lang="en")
+	head
+		title 
+
+		link(href='//fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
+		link(rel="stylesheet", href="/public/css/style.css")
+			
+	body(id="error-page", class=['page', 'fluid'], data-ng-app="teechioDashboard")
+		div#wrap
+			div.error
+				p.message #{message}
+				p.help Need help? Shoot us a line at <a href="mailto:support@teech.io">support@teech.io</a>

@@ -1,0 +1,50 @@
+div(id="walkthrough-cta", data-ng-show="!disabledWalkthrough")
+	div.grid-container: div.grid-100
+		div.grid-80
+			a(href="/walkthrough")
+				<i class="fa fa-lightbulb-o space-right"></i><span>Hi there! Check out our walkthrough and start building, it's easy!</span>
+		div.grid-20.close-cta
+			a(data-ng-click="disableWalkthrough()"): img(src="/public/images/svgs/thin-times.svg")
+div(id="overview")
+	div(class="entries grid-container")
+		div(class="inner-navbar")
+			div.api-calls.grid-50
+				h4 API usage
+				p.loader: img(src="/public/images/preloader.gif")
+				span.stats.set-hidden
+					p.percentage {[ stats.api.calls ]}
+					p.number <i class="fa fa-dashboard"></i> {[ stats.api.percent ]} &percnt;
+			//div.grid-33
+				h4 Events usage
+				p.percentage {[ stats.events.percent ]} &percnt;
+				p.number <i class="fa fa-dashboard"></i> {[ stats.events.calls ]}
+			div.storage-usage.grid-50
+				h4 Disk usage (mb)
+				p.loader: img(src="/public/images/preloader.gif")
+				span.stats.set-hidden
+					p.percentage {[ stats.storage.data ]} 
+					p.number <i class="fa fa-dashboard"></i> {[ stats.storage.percent ]} &percnt;
+div(id="applications-list", class="entries grid-container")
+	div(class="inner-navbar")
+		div.grid-50: h2.page-title Applications
+		div.grid-50.action-container: a(class="new-app-btn btn btn-primary", data-target="#new-application", data-toggle="modal") <i class="fa fa-plus space-right"></i> new application
+	div(id="app-1", class="entry grid-33", data-ng-repeat="application in applications")
+		div(class="grid-item-content")
+			h2.item-name {[ application.name ]}
+			p.item-key <i class="fa fa-key"></i> {[ application.uid ]}
+			p.item-action: a(href="/apps/{[ application.uid ]}") explore
+div(id="new-application", class="modal fade")
+	div.modal-dialog
+		div.modal-content
+			div.modal-header
+				h3 New application
+				p Enter a name for your brand new application:
+			div.modal-body
+				div.notification
+				input(type="text", class="form-control", name="_name", placeholder="application name", data-ng-model="_app.name")
+				div.checkbox.sample-data
+					span Fill in with sample data
+					input(type="checkbox", data-ng-model="_app.sandbox", value="true")
+			div.modal-footer
+				button(type="button", class="btn btn-default uppercase", data-dismiss="modal") cancel
+				button(type="button", class="btn btn-primary uppercase", data-ng-click="createApplication()") create

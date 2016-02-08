@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+	header#site-header
+		div.container
+	div(class="container", data-ng-controller="AccountController")
+		div.login-container
+			h2 Sign up to Teech.io
+			- if(!email) {
+			div.github-login
+				a(href="/auth/github", class="btn btn-default github-btn") <i class="fa fa-github space-right"></i> signup with GitHub
+				span.hr or
+			- }
+			form(data-ng-init="account.email='#{ email }'", data-ng-submit="register()")
+				div.notification
+				div.form-group
+					input(type="email", class="form-control", placeholder="email", data-ng-model="account.email", required="required")
+				div.form-group
+					input(type="password", class="form-control", placeholder="password", data-ng-model="account.password", required="required")
+				div.form-action
+					button(type="submit", class="btn btn-primary uppercase") sign up
+			div.signup-link
+				p Already have an account? <a href="/signin">Sign in here</a> 
+		p.support-link Need help? Drop us a line at <a href="mailto:support@teech.io">support@teech.io</a>

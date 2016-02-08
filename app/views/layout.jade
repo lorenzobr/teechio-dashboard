@@ -1,0 +1,25 @@
+doctype
+html(lang="en")
+	head
+		title 
+
+		link(href='//fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
+		link(href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600", rel="stylesheet", type="text/css")
+		link(rel="stylesheet", href="/public/css/style.css")
+			
+	body(id=bodyId, class=['page', 'fluid'], data-ng-app="teechioDashboard", data-n-progress="", data-clear-form="", data-notification-pop="")
+		div#wrap
+			- if(flash && flash.message) {
+			div(class="session-message #{flash.clazz}") #{flash.message}
+				- delete flash.message
+			- }
+			block content
+
+		script(src="//code.jquery.com/jquery-2.1.0.min.js")
+		script(src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
+		script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js")
+
+		script(src="/public/js/libs.js")
+		script(src="/public/js/main.js")
+			
+		block scripts

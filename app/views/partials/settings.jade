@@ -1,0 +1,112 @@
+div(class="grid-container")
+	div(id="settings-container", class="grid-80 tablet-grid-100 mobile-grid-100")
+		nav(id="settings-nav", data-active-highlight="")
+			a(class="active", data-toggle="tab", data-target="#profile") Account
+			//-a(class="", data-toggle="tab", data-target="#billing") Billing
+			a(class="", data-toggle="tab", data-target="#password") Password 
+		div(class="tab-content")
+			div#service-notification
+				div.notification
+			div(id="profile", class="tab-pane active")
+				h1 Account settings
+				div(class="profile-settings sub-section")
+					div.grid-container: div.grid-100
+						h3 Profile settings
+						form(class="profile-settings", data-ng-submit="updateFullname()")
+							div.notification
+							div.form-group
+								input(type="text", class="form-control", data-ng-model="_profile.firstname", placeholder="Firs name", required="required")							
+							div.form-group
+								input(type="text", class="form-control", data-ng-model="_profile.lastname", placeholder="Last name", required="required")
+							div.form-group
+								button(type="submit", class="btn btn-primary btn-lg uppercase") save settings
+			//-div(id="billing", class="tab-pane")
+				h1 Billing
+				div(class="nocard", data-ng-show="!settings.default_card")
+					p There are no cards associated with this account.
+					a(class="btn btn-primary", data-show-or-hide="#ccard-selection") add card
+				div(class="ccard-info", data-ng-show="settings.default_card")
+					p The following card is used for payments:
+					p.ccard-number ****&nbsp;****&nbsp;****&nbsp;{[ settings.card.last4 ]}
+					a(class="btn btn-primary", data-show-or-hide="#ccard-selection") change card details
+				div(id="ccard-selection", class="set-hidden")
+					div.grid-container: div.grid-100
+						h3 Credit card details
+						div.notification
+						form(class="ccard-new", data-ng-submit="saveCCard()")
+							div.form-group
+								input(type="text", class="form-control", data-ng-model="_ccard.number", placeholder="Card number, eg.: 4536948509873847")
+							div.form-group
+								div.row
+									div.col-md-4: input(type="text", class="form-control", data-ng-model="_ccard.exp", placeholder="Expiry month, eg.: 04/2018")
+									div.col-md-4: input(type="text", class="form-control", data-ng-model="_ccard.cvc", placeholder="CVC")
+									div.col-md-4: &nbsp;
+							div.form-group
+								button(type="submit", class="btn btn-primary btn-lg uppercase") save card
+				div(class="change-plan sub-section")
+					div.grid-container: div.grid-100
+						h3 Change your plan
+						h4 Our plans are based on monthly API usage and file storage.
+						div.current-plan
+							span.icon: i.fa.fa-check-circle-o
+							div.message
+								h4 You're currently on a <strong>{[ settings.subscription.plan ]}</strong> plan.
+						div(id="warning-card-notification", class="notification")
+						div.plan-selection
+							table.table
+								thead: tr 
+									td plan
+									td apps 
+									td API calls
+									td Storage
+									td 
+								tbody
+									tr
+										td
+											span.plan-name Starter
+											span.plan-amount Free
+										td {[ plans.starter.apps ]}
+										td {[ plans.starter.calls ]}
+										td {[ plans.starter.storage / 1024 ]} GB
+										td(data-ng-show="settings.subscription.plan == 'Starter'"): a(href="", class="btn btn-default", disabled="disabled") your plan
+										td(data-ng-show="settings.subscription.plan != 'Starter'"): a(href="", class="btn btn-primary", data-ng-click="changePlan('Starter', plans.starter.id)") select
+									tr
+										td
+											span.plan-name Indie
+											span.plan-amount &#36; {[ plans.indie.price / 100 ]}.00
+										td Unlimited
+										td {[ plans.indie.calls ]}
+										td {[ plans.indie.storage / 1024 ]} GB
+										td(data-ng-show="settings.subscription.plan == 'Indie'"): a(href="", class="btn btn-default", disabled="disabled") your plan
+										td(data-ng-show="settings.subscription.plan != 'Indie'"): a(href="", class="btn btn-primary", data-ng-click="changePlan('Indie', plans.indie.id)") select
+									tr
+										td
+											span.plan-name Startup
+											span.plan-amount &#36; {[ plans.startup.price / 100 ]}.00
+										td Unlimited
+										td {[ plans.startup.calls ]}
+										td {[ plans.startup.storage / 1024 ]} GB
+										td(data-ng-show="settings.subscription.plan == 'Startup'"): a(href="", class="btn btn-default", disabled="disabled") your plan
+										td(data-ng-show="settings.subscription.plan != 'Startup'"): a(href="", class="btn btn-primary", data-ng-click="changePlan('Startup', plans.startup.id)") select
+									tr
+										td
+											span.plan-name Business
+											span.plan-amount &#36; {[ plans.business.price / 100 ]}.00
+										td Unlimited
+										td {[ plans.business.calls / 1000000 ]} million
+										td {[ plans.business.storage / 1024 ]} GB
+										td(data-ng-show="settings.subscription.plan == 'Business'"): a(href="", class="btn btn-default", disabled="disabled") your plan
+										td(data-ng-show="settings.subscription.plan != 'Business'"): a(href="", class="btn btn-primary", data-ng-click="changePlan('Business', plans.business.id)") select
+			div(id="password", class="tab-pane")
+				h1 Password settings
+				div(class="change-password sub-section")
+					div.grid-container: div.grid-100
+						h3 Change password
+						form(class="change-password", data-ng-submit="updatePassword()")
+							div.notification
+							div.form-group
+								input(type="password", class="form-control", data-ng-model="_password.pwdnew", placeholder="new password", required="required")
+							div.form-group
+								input(type="password", class="form-control", data-ng-model="_password.pwdcheck", placeholder="confirm password", required="required")
+							div.form-group
+								button(type="submit", class="btn btn-primary btn-lg uppercase") update password 

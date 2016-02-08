@@ -1,0 +1,66 @@
+{
+	"api" : {
+		"host" : "",
+		"master_token" : ""
+	},
+	"github" : {
+		"client_id" : "",
+		"client_secret" : "" 
+	},
+	"mysql": {
+		"host" : "",
+		"port": "",
+		"user": "",
+		"password": "",
+		"database": "",
+		"debug": true
+	},
+ 	"redis": {
+ 		"host": "",
+ 		"port": 6379,
+ 		"password": "",
+ 		"debug": false
+ 	},
+	"mandrill_token" : "",
+	"mailchimp" : {
+		"token" : "",
+		"list_id" : ""
+	},
+	"analytics" : {
+		"write_key" : ""
+	},
+	"stripe" : {
+		"secret_key" : "",
+		"publishable_key" : "",
+		"plans" : {
+			"starter" : {
+				"id" : "plan_aYq4Txf3iU",
+				"price" : 0,
+				"apps" : 1,
+				"calls" : 50000,
+				"storage" : 1024
+			},
+			"indie" : {
+				"id" : "plan_vAOTwx1ys0",
+				"price" : 1900,
+				"apps" : 0,
+				"calls" : 200000,
+				"storage" : 5120 
+			},
+			"startup" : {
+				"id" : "plan_L9bHNtS0i5",
+				"price" : 3900,
+				"apps" : 0,
+				"calls" : 500000,
+				"storage" : 10240
+			},
+			"business" : {
+				"id" : "plan_6FhpYv40rj",
+				"price" : 14900,
+				"apps" : 0,
+				"calls" : 1000000,
+				"storage" : 20480 
+			}
+		}
+	}
+}

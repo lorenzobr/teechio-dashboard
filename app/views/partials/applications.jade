@@ -1,0 +1,128 @@
+div(id="application-overview", data-ng-include="'/public/partials/app-overview.html'", onload="loadWeeklyChart()")
+div(id="application-dashboard")
+	div(class="tools-navbar")
+		div.grid-container
+			div.grid-50
+				nav(data-active-highlight="")
+					a(class="active", data-ng-click="switchTab('console')") <i class="fa fa-desktop space-right"></i> API console
+					a(class="", data-ng-click="switchTab('search')") <i class="fa fa-search space-right"></i> Search
+					a(class="", data-ng-click="switchTab('storage')") <i class="fa fa-download space-right"></i> Storage browser
+			div.grid-50
+div(data-ng-switch on="sectionTab", data-animate-console="")
+	div(id="application-console", data-ng-switch-default)
+		div.grid-container
+			form(data-ng-submit="makeCall()")
+				div.grid-60.tablet-100.mobile-100
+					p Collection
+					div.input-group
+						input(type="text", class="", name="", data-ng-model="console.path", data-ng-change="buildEndpoint()", required="required", data-console-endpoint-hint="")
+						div.input-group-btn
+							button(type="button", class="btn dropdown-toggle", data-toggle="dropdown") {[ console.method ]} <i class="fa fa-chevron-down space-left"></i>
+							ul.dropdown-menu.pull-right
+								li: a(data-ng-click="switchMethod('GET')", data-set-console-method="get") GET
+								li: a(data-ng-click="switchMethod('POST')", data-set-console-method="post") POST
+								li: a(data-ng-click="switchMethod('PUT')", data-set-console-method="put") PUT
+								li: a(data-ng-click="switchMethod('DELETE')", data-set-console-method="delete") DELETE
+					div.hint-box
+						span.hint-to-doc.pull-right <i class="fa fa-life-ring space-right"></i> Learn more: <a href="http://developer.teech.io/?curl&#35;{[ hintDoc ]}">read the docs about the "{[ hintDoc ]}" API</a>
+					div(id="path-key", data-ng-show="console.method != 'POST'")
+						p Key
+						input(type="text", class="inp-key", name="", data-ng-model="console.key", data-ng-change="buildEndpoint()")
+					div(class="request-body", data-ng-show="console.method == 'POST' || console.method == 'PUT'")
+						p JSON Data:
+						textarea(data-ng-model="console.payload")
+				div.clear
+				div#api-endpoint.grid-100
+					div.input-group 
+						input(type="text", class="", name="", data-ng-model="typed.endpoint", disabled="disabled")
+						span.input-group-btn
+							button(class="btn btn-default", type="submit") <i class="fa fa-caret-right"></i>
+				div(id="api-output", class="grid-100 set-hidden")
+					pre
+						code {[ output.status ]}
+						code Content-Length: {[ output.length ]}
+						code Content-Type: {[ output.type ]}
+						code Date: {[ output.date ]}
+						code.output-body {[ output.body ]}
+	div(id="application-search", data-ng-switch-when="search")
+		div.grid-container
+			form(data-ng-submit="makeCall('search')")
+				div.grid-60.tablet-100.mobile-100
+					p Collection
+					div.input-group
+						input(type="text", class="", name="", data-ng-model="console.path", data-ng-change="buildEndpoint()", required="required", data-console-endpoint-hint="")
+					div.search-hint-box
+						span.hint-to-doc.pull-right <i class="fa fa-life-ring space-right"></i> Learn more: <a href="http://developer.teech.io/?curl&#35;queries">read the docs about the "queries" API</a>
+					div(id="path-key")
+						p Search query
+						input(type="text", class="inp-key", name="", data-ng-model="console.query", data-ng-change="buildEndpoint()")
+				div.clear
+				div#api-endpoint.grid-100
+					div.input-group 
+						input(type="text", class="", name="", data-ng-model="typed.endpoint", disabled="disabled")
+						span.input-group-btn
+							button(class="btn btn-default", type="submit") <i class="fa fa-caret-right"></i>
+				div(id="api-output", class="grid-100 set-hidden")
+					pre
+						code {[ output.status ]}
+						code Content-Length: {[ output.length ]}
+						code Content-Type: {[ output.type ]}
+						code Date: {[ output.date ]}
+						code.output-body {[ output.body ]}
+	div(id="application-storage", data-ng-switch-when="storage")
+		div.grid-container
+			div.section-tools.grid-100
+				a(class="btn btn-primary", data-target="#upload-modal", data-toggle="modal") <i class="fa fa-cloud-upload space-right"></i> upload a file
+			div.clear
+			div(id="files-list", class="grid-100")
+				table(class="table")
+					thead: tr
+						td Name
+						td Size
+						td URL
+						td -
+					tbody
+						tr(id="{[ file._id ]}", data-ng-repeat="(index, file) in files")
+							td {[ file.name ]}
+							td {[ file.size ]}
+							td: input(type="text", value="{[ file.url ]}", data-select-on-focus="")
+							td: a(class="fa fa-trash-o", data-ng-click="deleteFile(file._id, file.name)") &nbsp;
+		div(id="upload-modal", class="modal fade")
+			div.modal-dialog
+				div.modal-content
+					div.modal-header
+						h3 Upload a file
+						p Enter a name for your brand new application:
+					div.modal-body
+						div(id="files-uploader", data-ng-show="!_uprogress")
+							div(id="drop-area") 
+								span.icon: i.fa.fa-cloud-upload
+								span drop files here<span class="or-hr">or</span>
+								div(class="uploader-controls")
+									button(id="browse-files-btn", class="btn btn-primary", data-file-uploader="", data-drop-area="") Select files
+								p.files-queue-size Files in the queue: {[ _queueSize ]}
+						div(id="uploader-progress", data-ng-show="_uprogress")
+							div.notification
+							p <span class="percentage">0</span>&nbsp;&#37;
+					div.modal-footer
+						button(type="button", class="btn btn-default uppercase", data-dismiss="modal") cancel
+						button(type="button", class="btn btn-primary uppercase", data-ng-show="queue.length != 0", data-ng-click="startUpload()") upload
+
+div(id="delete-modal", class="modal fade")
+	div.modal-dialog
+		div.modal-content
+			div.modal-header
+				h3 Delete applicaton
+			div.modal-body
+				div.warning-banner
+					span.icon <i class="fa fa-warning space-right"></i> 
+					span.text You're about to delete <strong>{[ dashboard.appname ]}</strong><br/>This action can't be undone and all app data will be lost.
+				p Type in your application name to confirm:
+				input(type="text", class="form-control", placeholder="application name", data-ng-model="_deleteApp.name")
+				div.notification
+			div.modal-footer
+				button(type="button", class="btn btn-default uppercase", data-dismiss="modal") cancel
+				button(type="button", class="btn btn-delete uppercase", data-ng-click="deleteApp(dashboard.appid)") delete
+
+
+

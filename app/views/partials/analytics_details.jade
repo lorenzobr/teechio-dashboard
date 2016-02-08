@@ -1,0 +1,49 @@
+extends ../layout.analytics
+
+block content
+	header(id="site-header")
+		div.grid-container
+			div.grid-50
+				div.block-content
+					h3.text-uppercase Teech.io Learning Analytics
+					p.lead Real-time data from our WordsRemember Android demo app.
+					p This is a a showcase of how to use Teech.io learning analytics API to build custom dashboards and deliver useful insights on how students are learning.
+					p.small <strong>Disclaimer:</strong> we replaced original users names with fake random names
+			div.grid-50
+				a(href="https://play.google.com/store/apps/details?id=com.teechio.wordsrepeat", target="_blank")
+					div.app-banner.block-content
+	div(id="site-content", data-ng-init="user = '#{user}'")
+		div.grid-container
+			div(data-avg-widgets="")
+				div(class="chart-container grid-33")
+					div.entry.green
+						div.chart: p.number {[ avgCorrect ]}
+						div(class="widget-title text-center"): h4.text-uppercase Average correct answers per Session
+				div(class="chart-container grid-33")
+					div.entry.red
+						div.chart: p.number {[ avgWrong ]}
+						div(class="widget-title text-center"): h4.text-uppercase Average wrong answers per session
+				div(class="chart-container grid-33")
+					div.entry
+						div.chart: p.number {[ avgDuration ]}
+						div(class="widget-title text-center"): h4.text-uppercase Average time to answer (sec)
+			div.clear
+			div(class="chart-container grid-100")
+				div.entry
+					div(id="answers-day", class="chart", data-answers-day="")
+					div(class="widget-title text-center"): h4.text-uppercase Correct answers vs. Wrong answers per day
+			div.clear
+			div(id="total-words-count", class="chart-container grid-50")
+				div.entry
+					div.chart: p.number {[ saved_words ]}
+					div(class="widget-title text-center"): h4.text-uppercase Total words saved
+			div(class="chart-container grid-50")
+				div.entry
+					div(id="hints-word", class="chart", data-hints-word="")
+					div(class="widget-title text-center"): h4.text-uppercase Hints per word
+			div.clear
+			div(class="chart-container grid-100")
+				div.entry
+					div(id="hints-correct-session", class="chart", data-hints-correct-session="")
+					div(class="widget-title text-center"): h4.text-uppercase Hints vs. Correct answers per session
+						

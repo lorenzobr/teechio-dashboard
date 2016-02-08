@@ -1,0 +1,36 @@
+{
+  "name": "teechio-dashboard",
+  "version": "2.6.0",
+  "dependencies": {
+  	"express" : "3.4.8",
+	  "jade" : "*",
+    "request" : "*",
+    "async" : "0.7.0",
+    "mysql" : "2.1.1",
+    "redis" : "0.10.3",
+    "mailchimp-api" : "2.0.4",
+    "mandrill-api" : "1.0.39",
+    "rand-token" : "*",
+    "analytics-node" : "1.0.0",
+    "stripe" : "2.5.2",
+    "colors" : "0.6.2",
+    "chance" : "*"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.7.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+   	"grunt-contrib-clean": "~0.5.0",
+	  "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-less" : "~0.8.3",
+    "grunt-contrib-jade": "~0.8.0",
+   	"grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.5.0",
+    "grunt-ngmin": "0.0.3",
+    "grunt-nodemon": "~0.1.2",
+    "grunt-concurrent": "~0.4.2",
+    "load-grunt-tasks": "~0.2.0",
+    "time-grunt": "~0.2.0",
+    "jshint-stylish": "~0.1.3"
+  }
+}

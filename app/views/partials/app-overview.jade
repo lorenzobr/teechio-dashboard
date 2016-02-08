@@ -1,0 +1,28 @@
+div.grid-container
+	div.grid-50
+		h4 Authentication
+		h5 API Key
+		input(type="text", value="", name="apikey", data-ng-model="dashboard.apikey", disabled="disabled")
+		h5 Application Id
+		input(type="text", value="", name="appid", data-ng-model="dashboard.appid", disabled="disabled")
+		//-h4.upgrade-plan Plan
+		//-p You're on the <span class="plan-current">{[ currentPlan ]}</span> plan
+		//-a(href="/settings", class="upgrade-plan-btn btn btn-default") <i class="fa fa-plus space-right"></i> upgrade
+		h4.delete-app Delete application
+		p Be careful with this, you will lose all of your app data!
+		a(class="btn btn-default btn-delete", data-target="#delete-modal", data-toggle="modal") <i class="fa fa-trash-o space-right"></i> delete
+	div.grid-50.grid-parent
+		div.grid-container
+			h4 Application usage
+			div.app-usage.grid-33
+				p.number {[ dashboard.apicalls ]}
+					span.label APIs
+			div.app-usage.grid-33
+				//p.number 36
+					span.label Storage (Mb)
+			div.app-usage.grid-33
+				//p.number 8476
+					span.label Events
+			div.clear
+			h5.chart-title Past 4 weeks API calls
+			div#app-usage-chart.chart
